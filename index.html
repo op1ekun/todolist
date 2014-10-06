@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="todoApp">
+    <head>
+        <title>TODOlist App</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
+    </head>
+    <body>
+        <div ng-controller="TodoAppController">
+            <h1>Application version {{ app.version }}</h1>
+            <h2>Hello it's {{ clock.now | date : "dd-MM-yyyy 'the time is' hh:mm:ss" }}!</h2>
+
+            <h3>Add TODO item</h3>
+            <input type="text" ng-model="todo.item" ng-keypress="todo.addItem($event)" value="{{todo.item}}" />
+
+            <list class="todolist" items="todo.items" removable-items></list>
+        </div>
+
+        <!-- Separate modules -->
+        <script src="app/modules/list/list.directives.js"></script>
+        <!-- centralized entry point for the module dependencies -->
+        <script src="app/modules/list/list.module.js"></script>
+
+        <script src="app/modules/notification/notification.services.js"></script>
+        <script src="app/modules/notification/notification.module.js"></script>
+
+        <script src="app/app.controllers.js"></script>
+        <script src="app/app.js"></script>
+    </body>
+</html>
