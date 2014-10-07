@@ -1,9 +1,9 @@
 angular.module('list.Directives', [
         'notification.Services'
     ])
-    .directive('list', function() {
+    .directive('list', function listDirective() {
 
-        function link($scope, elem, attrs) {
+        function linker($scope, elem, attrs) {
             console.log('attributes', attrs);
 
             $scope.$watchCollection('items', function() {
@@ -31,6 +31,6 @@ angular.module('list.Directives', [
             replace: true,
             template: '<ul class="list"><li ng-repeat="item in items">{{item}}<span ng-if="removableItems" ng-click="removeItem(item)"> [x] </span></li></ul>',
             controller: listController,
-            link: link
+            link: linker
         };
     });

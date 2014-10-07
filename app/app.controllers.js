@@ -17,8 +17,8 @@ angular.module('todoApp.Controllers', [
              * @param {AngularJS event} $event
              * 
              * @todo validation
-             * @todo notification 
-             */
+             * @todo notification
+              */
             $scope.todo.addItem = function($event) {
                 if ($event.charCode === 13 &&
                     $scope.todo.items.indexOf($scope.todo.item) === -1) {
