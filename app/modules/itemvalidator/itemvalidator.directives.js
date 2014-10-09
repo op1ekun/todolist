@@ -15,6 +15,7 @@ angular.module('itemValidator.Directives', [])
         }
 
         return {
+            restrict: 'A',
             require: 'ngModel',
             scope: {
                 items: '='

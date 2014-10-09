@@ -2,6 +2,7 @@
 <html ng-app="todoApp">
     <head>
         <title>TODOlist App</title>
+        <link rel="stylesheet" href="app/styles/main.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
     </head>
     <body>
@@ -12,7 +13,7 @@
             <h3>Add TODO item</h3>
             <form name="addItemForm" class="css-form" novalidate>                
                 <input type="text" name="itemName" ng-model="todo.item" ng-keypress="todo.addItem($event)" value="{{todo.item}}" duplicate items="todo.items" />
-                <span ng-show="addItemForm.itemName.$error.duplicate">Duplicate value</span>
+                <span class="error" ng-show="addItemForm.itemName.$error.duplicate">Duplicated item</span>
             </form>
 
             <list class="todolist" items="todo.items" removable-items></list>
