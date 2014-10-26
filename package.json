@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/op1ekun/todolist/issues"
   },
-  "homepage": "https://github.com/op1ekun/todolist"
+  "homepage": "https://github.com/op1ekun/todolist",
   "devDependencies": {
     "grunt": "0.4.x",
     "grunt-bower-cli": "0.0.x",
