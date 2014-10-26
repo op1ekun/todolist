@@ -1,0 +1,8 @@
+.error {
+    color: #f00;
+    font-weight: bold;
+}
+
+.ng-invalid-duplicate .error {
+    text-transform: uppercase;
+}
