@@ -1,0 +1,28 @@
+{
+  "name": "todolist",
+  "version": "0.0.1",
+  "homepage": "https://github.com/op1ekun/todolist",
+  "authors": [
+    "op1ekun <woociek@gmail.com>"
+  ],
+  "description": "todolist demo app in modularized angulajs",
+  "main": "index.html",
+  "keywords": [
+    "todolist",
+    "angularjs"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "jasmine": "~2.0.4",
+    "angular": "~1.3.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.3.0"
+  }
+}
