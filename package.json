@@ -3,12 +3,6 @@
   "version": "0.0.1",
   "description": "dev env for todolist app",
   "main": "index.html",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/op1ekun/todolist.git"
@@ -24,4 +18,17 @@
     "url": "https://github.com/op1ekun/todolist/issues"
   },
   "homepage": "https://github.com/op1ekun/todolist"
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "grunt-bower-cli": "0.0.x",
+    "grunt-replace": "0.4.x",
+    "grunt-recess": "0.5.x",
+    "grunt-contrib-concat": "0.3.x",
+    "grunt-contrib-uglify": "0.2.x",
+    "grunt-contrib-clean": "0.5.x",
+    "grunt-contrib-copy": "0.4.x",
+    "grunt-contrib-less": "~0.9.0",
+    "testem": "^0.6.11",
+    "grunt-cli": "^0.1.13"
+  },
 }
