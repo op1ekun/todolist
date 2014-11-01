@@ -23,5 +23,5 @@
   },
   "scripts": {
     "test": "node node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=test/jasmine.json"
-  },
+  }
 }
