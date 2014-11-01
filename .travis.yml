@@ -1,10 +1,10 @@
 language: node_js
 node_js:
   - "0.10"
-before_script:
-  - npm install -g bower
-  - npm install -g testem
-  - npm install -g grunt-cli
-  - npm install
-script:
-  - testem ci
+#before_install:
+#install:
+#before_script:
+#script:
+#after_success:
+#after_failure:
+#after_script:

@@ -1,6 +1,0 @@
-{
-	"framework": "jasmine",
-	"test_page": "test/testRunner.html",
-	"launch_in_ci": ["PhantomJS"],
-	"launch_in_dev": ["PhantomJS", "Chrome"]
-}

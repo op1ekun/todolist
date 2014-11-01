@@ -9,8 +9,6 @@ describe('List module', function() {
         // Create a new scope that's a child of the $rootScope
         scope = $rootScope.$new();
         compile = $compile;
-
-
     }));
 
     it('directive renders', function() {
