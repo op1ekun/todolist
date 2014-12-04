@@ -4,7 +4,7 @@ node_js:
 #before_install:
 #install:
 before_script:
-  - "bower install"
+  - "node_modules/bower/bin/bower install"
 #script:
 #after_success:
 #after_failure:
