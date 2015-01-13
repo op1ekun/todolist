@@ -12,10 +12,9 @@ describe('List module', function() {
     }));
 
     it('directive renders', function() {
-        var elem = angular.element('<list class="todolist" items="todo.items" removable-items></list>');
+        var elem = angular.element('<list items="items" removable-items></list>');
         compile(elem)(scope);
-        console.log(elem);
 
-        expect(elem[0].outerHTML).toEqual('<ul class="todolist list ng-scope ng-isolate-scope" items="todo.items" removable-items=""><!-- ngRepeat: item in items --></ul>');
+        expect(elem[0].outerHTML).toContain('<ul class="list ng-scope ng-isolate-scope" items="items" removable-items=""><!-- ngRepeat: item in items --></ul>');
     });
 });

@@ -22,6 +22,8 @@ module.exports = function(config) {
         'app/modules/notification/notification.module.js',
         'app/modules/list/list.directives.js',
         'app/modules/list/list.module.js',
+        'app/modules/todolist/todolist.directives.js',
+        'app/modules/todolist/todolist.module.js',
         'app/modules/itemvalidator/itemvalidator.directives.js',
         'app/modules/itemvalidator/itemvalidator.module.js',
         'app/app.controllers.js',

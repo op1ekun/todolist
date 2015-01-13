@@ -1,6 +1,6 @@
 angular.module('todoApp', [
     'todoApp.Controllers',
-    'list',
+    'todolist',
     'itemValidator'
 ])
 .config(function() {
