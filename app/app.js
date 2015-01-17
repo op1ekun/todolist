@@ -10,7 +10,7 @@ angular.module('todoApp', [
 
     // add app version to the "global" namespace
     $rootScope.app = {
-        version : '0.0.1'
+        version : '0.0.2'
     };
 
     console.log('app run');

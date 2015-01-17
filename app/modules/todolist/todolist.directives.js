@@ -35,7 +35,8 @@ angular.module('todolist.Directives', [
                             '</li>' +
                         '</ul>' +
                         '<list items="items" removable-items>' +
-                            '<a href="" ng-click="markAsDone(item)" class="itemDoneButton">DONE</a>' +
+                            // a very nasty way of getting the to markAsDone method from isolated scope ;)
+                            '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton">DONE</a>' +
                         '</list>' + 
                     '</div>',
         controller: todolistController
