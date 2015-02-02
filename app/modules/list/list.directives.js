@@ -34,7 +34,7 @@ angular.module('list.Directives', [
                             // replaced by a custom element
                             '<span ng-transclude></span>' +
                             // FIXME change span to ahref 
-                            ' {{item.name}} <span ng-if="removableItems" ng-click="removeItem(item)"> [x] </span>' +
+                            ' {{item.name}} <a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton"> [x] </a>' +
                         '</li>' +
                     '</ul>',
         controller: listController,
@@ -43,7 +43,7 @@ angular.module('list.Directives', [
 })
 // FIXME id adds another DONE at the end of the item
 .directive('inject', function(){
-    'use strcit';
+    'use strict';
 
     return {
         link: function($scope, $element, $attrs, controller, $transclude) {

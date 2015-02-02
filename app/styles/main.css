@@ -6,3 +6,11 @@
 .ng-invalid-duplicate .error {
     text-transform: uppercase;
 }
+
+.listItem.done {
+    color: #ccc;
+}
+
+.listItem.done .itemDoneButton {
+    display: none;
+}

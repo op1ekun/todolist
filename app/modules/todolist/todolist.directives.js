@@ -9,9 +9,9 @@ angular.module('todolist.Directives', [
     function todolistController($scope) {
 
         $scope.markAsDone = function(item) {
-            console.log('todolist args', arguments);
-            // var index = $scope.items.indexOf(item);
-            // $scope.items[index].done = true;
+            var index = $scope.items.indexOf(item);
+            $scope.items[index].done = true;
+            $scope.items[index].cssClass = 'done';
         };
     }
 

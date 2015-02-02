@@ -1,5 +1,23 @@
 describe('TODO List module', function() {
+    'use strict';
+
     var scope, compile, elem, cleanedHTML;
+
+    // all kudos to Dsyko
+    // http://stackoverflow.com/questions/16802795/click-not-working-in-mocha-phantomjs-on-certain-elements#answer-16803781
+    var clickElement = function (elem) {
+        var ev = document.createEvent('MouseEvent');
+        ev.initMouseEvent(
+          'click',
+          true /* bubble */, true /* cancelable */,
+          window, null,
+          0, 0, 0, 0, /* coordinates */
+          false, false, false, false, /* modifier keys */
+          0 /*left*/, null
+        );
+
+        elem.dispatchEvent(ev);
+    };
 
     // initialize the app
     beforeEach(module('todoApp'));
@@ -57,28 +75,26 @@ describe('TODO List module', function() {
                         '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton ng-scope">DONE</a>' +
                         '<span ng-transclude=""></span>' + 
                         ' item1 ' + 
-                        '<span ng-if="removableItems" ng-click="removeItem(item)" class="ng-scope"> [x] </span>' +
+                        '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
                     '</li>' +
                     '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-binding ng-scope" inject="">' +
                         '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton ng-scope">DONE</a>' +
                         '<span ng-transclude=""></span>' + 
                         ' item2 ' +
-                        '<span ng-if="removableItems" ng-click="removeItem(item)" class="ng-scope"> [x] </span>' +
+                        '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
                     '</li>' + 
                 '</ul>' + 
             '</div>');
     });
 
     // FIXME
-    // it('marks element as DONE', function() {
-    //     var listItems = elem[0].querySelectorAll('.listItem .itemDoneButton');
+    it('marks element as DONE', function() {
+        var listItems = elem[0].querySelectorAll('.listItem .itemDoneButton');
 
-    //     console.log('listItems', listItems, listItems[0]);
+        clickElement(listItems[0]);
+        clickElement(listItems[1]);
 
-    //     listItems[0].click();
-    //     listItems[1].click();
-
-    //     expect(scope.todo.items[0].done).toBeTruthy();
-    //     expect(scope.todo.items[1].done).toBeTruthy();
-    // });
+        expect(scope.todo.items[0].done).toBeTruthy();
+        expect(scope.todo.items[1].done).toBeTruthy();
+    });
 });

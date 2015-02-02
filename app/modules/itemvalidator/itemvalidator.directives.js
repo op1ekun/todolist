@@ -1,6 +1,7 @@
 angular.module('itemValidator.Directives', [
 ])
 .directive('duplicate', function duplicateDirective() {
+    'use strict';
 
     function linker($scope, $elem, $attrs, $controller) {
 

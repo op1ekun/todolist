@@ -1,4 +1,10 @@
+/* global describe */
+/* global beforeEach */
+/* global inject */
+/* global it */
 describe('List module', function() {
+    'use strict';
+
     var scope, compile, elem, cleanedHTML;
 
     // initialize the app
@@ -40,11 +46,11 @@ describe('List module', function() {
             '<ul class="list ng-scope ng-isolate-scope" items="items" removable-items="">' +
                 '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-binding ng-scope" inject="">' +
                     '<span ng-transclude=""></span> item1 ' +
-                    '<span ng-if="removableItems" ng-click="removeItem(item)" class="ng-scope"> [x] </span>' +
+                    '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
                 '</li>' +
                 '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-binding ng-scope someTestClass" inject="">' +
                     '<span ng-transclude=""></span> item2 ' +
-                    '<span ng-if="removableItems" ng-click="removeItem(item)" class="ng-scope"> [x] </span>' +
+                    '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
                 '</li>' +
             '</ul>'
         );
