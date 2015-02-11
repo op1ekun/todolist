@@ -6,7 +6,7 @@ angular.module('list.Directives', [
 
     function linker($scope, $elem, $attrs) {
         $scope.$watchCollection('items', function() {
-            console.log('items changed');
+            console.log('items changed', $scope.items);
         });
 
         if ('removableItems' in $attrs) {
@@ -34,7 +34,8 @@ angular.module('list.Directives', [
                             // replaced by a custom element
                             '<span ng-transclude></span>' +
                             // FIXME change span to ahref 
-                            ' {{item.name}} <a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton"> [x] </a>' +
+                            '<span class="itemText">{{item.name}}</span>' +
+                            '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton"> [x] </a>' +
                         '</li>' +
                     '</ul>',
         controller: listController,

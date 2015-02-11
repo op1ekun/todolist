@@ -4,9 +4,12 @@ angular.module('todoApp', [
     'itemValidator'
 ])
 .config(function() {
+    'use strict';
+
     console.log('app configured');
 })
 .run(function($rootScope) {
+    'use strict';
 
     // add app version to the "global" namespace
     $rootScope.app = {
