@@ -4,7 +4,9 @@ node_js:
 #before_install:
 #install:
 before_script:
-  - "node_modules/bower/bin/bower install"
+  - "npm install grunt-cli -g"
+  - "npm install bower -g"
+  - "bower install"
 #script:
 #after_success:
 #after_failure:
