@@ -8,6 +8,12 @@ module.exports = function(grunt) {
                 configFile: 'karma.conf.js'
             }
         },
+        watch: {
+            scripts: {
+                files: [ 'app/*.js', 'app/modules/*/*.js' ],
+                tasks: [ 'build' ]
+            },
+        },
         ngAnnotate: {
             options: {
                 add: true,
@@ -32,6 +38,7 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     // grunt.loadNpmTasks('grunt-contrib-clean');

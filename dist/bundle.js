@@ -102,8 +102,9 @@ angular.module('list.Directives', [
     };
 });
 angular.module('list', [
-    'list.Directives'
-]);;
+    'list.Directives' /* this is a watcher test */
+]);
+;
 angular.module('notification', [
     'notification.Services'
 ]);;
