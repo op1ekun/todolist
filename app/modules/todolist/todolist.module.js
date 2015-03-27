@@ -1,3 +1,3 @@
 angular.module('todolist', [
-	'todolist.Directives'	
+    'todolist.Directives'
 ]);

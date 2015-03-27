@@ -6,7 +6,8 @@ angular.module('todoApp', [
 .config(function() {
     'use strict';
 
-    console.log('app configured');
+    // DEBUG
+    // console.log('app configured');
 })
 .run(function($rootScope) {
     'use strict';
@@ -16,5 +17,6 @@ angular.module('todoApp', [
         version : '0.0.3'
     };
 
-    console.log('app run');
+    // DEBUG
+    // console.log('app run');
 });

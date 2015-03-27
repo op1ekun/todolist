@@ -5,9 +5,10 @@ angular.module('list.Directives', [
     'use strict';
 
     function linker($scope, $elem, $attrs) {
-        $scope.$watchCollection('items', function() {
-            console.log('items changed', $scope.items);
-        });
+        // DEBUG
+        // $scope.$watchCollection('items', function() {
+        //     console.log('items changed', $scope.items);
+        // });
 
         if ('removableItems' in $attrs) {
             $scope.removableItems = true;
@@ -51,7 +52,8 @@ angular.module('list.Directives', [
             var innerScope = $scope.$new();
             
             $transclude(innerScope, function(clone) {
-                console.log($element);
+                // DEBUG
+                // console.log($element);
 
                 // $element.empty();
                 var ahref = $element.find('a');

@@ -8,8 +8,25 @@ angular.module('todolist.Directives', [
 
     function todolistController($scope) {
 
-        $scope.activeFilter = 'all';
+        var lastFilter;
+
+        $scope.activeFilter = lastFilter = 'all';
         $scope.filteredItems = $scope.items;
+
+        /**
+         * Calculates the app state based on last and active filter.
+         * Abstracts the state calculation and management from the consumer.
+         * 
+         * @return {Boolean}    the state value
+         */
+        function isFiltering() {
+            // calculate the state
+            var state = (lastFilter !== $scope.activeFilter);
+            // reset the last filter before the next use
+            lastFilter = $scope.activeFilter;
+            // return calculated state
+            return state;
+        }
 
         $scope.markAsDone = function(item) {
             var index = $scope.items.indexOf(item);
@@ -18,6 +35,8 @@ angular.module('todolist.Directives', [
         };
 
         $scope.filterBy = function(filterName) {
+            lastFilter = filterName;
+
             var filteredItems = [];
 
             // FIXME it's not optimized
@@ -45,6 +64,30 @@ angular.module('todolist.Directives', [
             $scope.filteredItems = filteredItems;
         };
 
+        $scope.$watchCollection('filteredItems', function(newItems, oldItems, scope) {
+            var filtering = isFiltering();
+
+            if (filtering) {
+                return;
+            }
+
+            oldItems.some(function(oldItem) {
+                var toBeRemovedIndex;
+
+                // find if an old item is missing from new items
+                if (newItems.indexOf(oldItem) == -1) {
+                    // if it does, 
+                    // try find it in the main items collection
+                    toBeRemovedIndex = $scope.items.indexOf(oldItem);
+
+                    // remove the item from the main collection
+                    if (toBeRemovedIndex > -1) {
+                        $scope.items.splice(toBeRemovedIndex, 1);
+                        return;
+                    }
+                }
+            });
+        });
     }
 
     return {
