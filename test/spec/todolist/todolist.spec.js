@@ -70,13 +70,13 @@ describe('TODO List module', function() {
                 '<strong>Show: </strong>' +
                 '<ul>' +
                     '<li>' + 
-                        '<a href="#active" ng-click="filterBy(\'active\')" class="filterBy">ACTIVE</a>' + 
+                        '<a href="#active" ng-click="filterBy(filters.ACTIVE)" class="filterBy">ACTIVE</a>' + 
                     '</li>' +
                     '<li>' +
-                        '<a href="#done" ng-click="filterBy(\'done\')" class="filterBy">DONE</a>' +
+                        '<a href="#done" ng-click="filterBy(filters.DONE)" class="filterBy">DONE</a>' +
                     '</li>' +
                     '<li>' + 
-                        '<a href="#all" ng-click="filterBy(\'all\')" class="filterBy">ALL</a>' +
+                        '<a href="#all" ng-click="filterBy(filters.ALL)" class="filterBy">ALL</a>' +
                     '</li>' +
                 '</ul>' +
                 '<ul class="list ng-isolate-scope" items="filteredItems" removable-items="">' +
