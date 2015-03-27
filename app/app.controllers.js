@@ -4,8 +4,9 @@ angular.module('todoApp.Controllers', [
 .controller('TodoAppController', function TodoAppController($scope, notification) {
     'use strict';
 
-    console.log('TodoAppController');
-    console.log('TodoAppController notification', notification);
+    // DEBUG
+    // console.log('TodoAppController');
+    // console.log('TodoAppController notification', notification);
 
     $scope.todo = {
         item: '',

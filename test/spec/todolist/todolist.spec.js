@@ -1,7 +1,7 @@
 describe('TODO List module', function() {
     'use strict';
 
-    var scope, compile, elem, cleanedHTML;
+    var scope, compile, elem, cleanedHTML, filters;
 
     // all kudos to Dsyko
     // http://stackoverflow.com/questions/16802795/click-not-working-in-mocha-phantomjs-on-certain-elements#answer-16803781
@@ -44,7 +44,10 @@ describe('TODO List module', function() {
                 },
                 {
                     name: 'item2'
-                }    
+                },
+                {
+                    name: 'item3'
+                }   
             ]
         };
 
@@ -57,6 +60,8 @@ describe('TODO List module', function() {
         // removes <!-- ngRepeat: item in items --> and similar $compile comments
         // TODO make it more reusable to not repeat it in every place when we need to test directives
         cleanedHTML = elem[0].outerHTML.replace(/<!--[^(-->)]+-->/g, '');
+
+        filters = elem[0].querySelectorAll('.filterBy');
     });
         
     it('directive renders', function() {
@@ -87,6 +92,12 @@ describe('TODO List module', function() {
                         '<span class="itemText ng-binding">item2</span>' +
                         '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
                     '</li>' + 
+                    '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-scope" inject="">' +
+                        '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton ng-scope">DONE</a>' +
+                        '<span ng-transclude=""></span>' + 
+                        '<span class="itemText ng-binding">item3</span>' +
+                        '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
+                    '</li>' + 
                 '</ul>' + 
             '</div>');
     });
@@ -94,29 +105,30 @@ describe('TODO List module', function() {
     it('marks element as DONE', function() {
         var listItems = elem[0].querySelectorAll('.listItem .itemDoneButton');
 
-        clickElement(listItems[0]);
         clickElement(listItems[1]);
+        clickElement(listItems[2]);
 
-        expect(scope.todo.items[0].done).toBeTruthy();
         expect(scope.todo.items[1].done).toBeTruthy();
+        expect(scope.todo.items[2].done).toBeTruthy();
     });
 
     it('filters list by ACTIVE items', function() {
-        var filters = elem[0].querySelectorAll('.filterBy'),
-            items;
+        var items;
 
+        // ACTIVE filter
         clickElement(filters[0]);
 
         items = elem[0].querySelectorAll('.listItem');
 
-        expect(items.length).toEqual(1);
+        expect(items.length).toEqual(2);
         expect(items[0].querySelector('.itemText').innerHTML).toContain('item2');
+        expect(items[1].querySelector('.itemText').innerHTML).toContain('item3');
     });
 
     it('filters list by DONE items', function() {
-        var filters = elem[0].querySelectorAll('.filterBy'),
-            items;
+        var items;
 
+        // DONE filter
         clickElement(filters[1]);
 
         items = elem[0].querySelectorAll('.listItem');
@@ -126,13 +138,34 @@ describe('TODO List module', function() {
     });
 
     it('it show all items', function() {
-        var filters = elem[0].querySelectorAll('.filterBy'),
-            items;
+        var items;
 
+        // ALL "filter"
         clickElement(filters[2]);
 
         items = elem[0].querySelectorAll('.listItem');
         
+        expect(items.length).toEqual(3);
+    });
+
+    // FIXME not totally happy about this step description
+    // @issue9
+    it('deletes an item from filtered view, the element is reflected in the main items collection', function() {
+        var items;
+
+        // DONE filter
+        clickElement(filters[1]);
+
+        items = elem[0].querySelectorAll('.listItem');
+        clickElement(items[0].querySelector('.itemRemoveButton'));
+
+        items = elem[0].querySelectorAll('.listItem');
+        expect(items.length).toEqual(0);
+
+        // ALL "filter"
+        clickElement(filters[2]);        
+
+        items = elem[0].querySelectorAll('.listItem');
         expect(items.length).toEqual(2);
     });
 });
