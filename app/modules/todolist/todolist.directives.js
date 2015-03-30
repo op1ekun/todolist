@@ -8,16 +8,17 @@ angular.module('todolist.Directives', [
 
     function todolistController($scope) {
 
-        var lastFilter;
+        var activeFilter, prevFilter;
 
         // supported filters
         $scope.filters = {
-                'ACTIVE': 'active',
-                'DONE': 'done',
-                'ALL': 'all'
-            }
+            'ACTIVE': 'active',
+            'DONE': 'done',
+            'ALL': 'all'
+        };
 
-        $scope.activeFilter = lastFilter = 'all';
+        // default filter
+        activeFilter = prevFilter = $scope.filters.ALL;
         $scope.filteredItems = $scope.items;
 
         /**
@@ -28,9 +29,9 @@ angular.module('todolist.Directives', [
          */
         function isFiltering() {
             // calculate the state
-            var state = (lastFilter !== $scope.activeFilter);
-            // reset the last filter before the next use
-            lastFilter = $scope.activeFilter;
+            var state = (activeFilter !== prevFilter);
+            // reset flag
+            prevFilter = activeFilter;
             // return calculated state
             return state;
         }
@@ -42,7 +43,11 @@ angular.module('todolist.Directives', [
         };
 
         $scope.filterBy = function(filterName) {
-            lastFilter = filterName;
+            // setup filters states
+            if (activeFilter !== filterName) {
+                prevFilter = activeFilter;
+                activeFilter = filterName;
+            }            
 
             $scope.filteredItems = $scope.items.filter(function(item) {
 
@@ -65,6 +70,10 @@ angular.module('todolist.Directives', [
                 }
             });
         };
+
+        $scope.$watchCollection('items', function(newItems, oldItems, scope) {
+            $scope.filterBy(activeFilter);
+        });
 
         $scope.$watchCollection('filteredItems', function(newItems, oldItems, scope) {
             var filtering = isFiltering();
