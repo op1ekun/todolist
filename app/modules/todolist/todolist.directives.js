@@ -12,13 +12,20 @@ angular.module('todolist.Directives', [
 
         // supported filters
         $scope.filters = {
-            'ACTIVE': 'active',
-            'DONE': 'done',
-            'ALL': 'all'
+            ACTIVE: {
+                name: 'active'
+            },
+            DONE: {
+                name: 'done'
+            },
+            ALL: {
+                name: 'all',
+                selected: 'selected'
+            }
         };
 
         // default filter
-        activeFilter = prevFilter = $scope.filters.ALL;
+        activeFilter = prevFilter = $scope.filters.ALL.name;
         $scope.filteredItems = $scope.items;
 
         /**
@@ -43,23 +50,26 @@ angular.module('todolist.Directives', [
         };
 
         $scope.filterBy = function(filterName) {
+
             // setup filters states
             if (activeFilter !== filterName) {
+                $scope.filters[activeFilter.toUpperCase()].selected = '';
                 prevFilter = activeFilter;
                 activeFilter = filterName;
-            }            
+                $scope.filters[activeFilter.toUpperCase()].selected = 'selected';
+            }
 
             $scope.filteredItems = $scope.items.filter(function(item) {
 
                 switch(filterName) {
 
-                    case $scope.filters.ACTIVE:
+                    case $scope.filters.ACTIVE.name:
                         if (!item.done) {
                             return item;
                         }
                     break;
 
-                    case $scope.filters.DONE:
+                    case $scope.filters.DONE.name:
                         if (item.done) {
                             return item;
                         }
@@ -69,6 +79,7 @@ angular.module('todolist.Directives', [
                         return item;
                 }
             });
+
         };
 
         $scope.$watchCollection('items', function(newItems, oldItems, scope) {
@@ -111,13 +122,13 @@ angular.module('todolist.Directives', [
                         '<strong>Show: </strong>' + 
                         '<ul>' + 
                             '<li>' +
-                                '<a href="#active" ng-click="filterBy(filters.ACTIVE)" class="filterBy">ACTIVE</a>' + 
+                                '<a href="#active" ng-click="filterBy(filters.ACTIVE.name)" ng-class="filters.ACTIVE.selected" class="filterBy">ACTIVE</a>' + 
                             '</li>' +
                             '<li>' + 
-                                '<a href="#done" ng-click="filterBy(filters.DONE)" class="filterBy">DONE</a>' + 
+                                '<a href="#done" ng-click="filterBy(filters.DONE.name)" ng-class="filters.DONE.selected" class="filterBy">DONE</a>' + 
                             '</li>' +
                             '<li>' +
-                                '<a href="#all" ng-click="filterBy(filters.ALL)" class="filterBy">ALL</a>' +
+                                '<a href="#all" ng-click="filterBy(filters.ALL.name)" ng-class="filters.ALL.selected" class="filterBy">ALL</a>' +
                             '</li>' +
                         '</ul>' +
                         '<list items="filteredItems" removable-items>' +
