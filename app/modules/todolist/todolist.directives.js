@@ -25,7 +25,7 @@ angular.module('todolist.Directives', [
         };
 
         // default filter
-        activeFilter = prevFilter = $scope.filters.ALL;
+        activeFilter = prevFilter = $scope.filters.ALL.name;
         $scope.filteredItems = $scope.items;
 
         /**
@@ -50,10 +50,14 @@ angular.module('todolist.Directives', [
         };
 
         $scope.filterBy = function(filterName) {
-            $scope.filters[$scope.activeFilter.toUpperCase()].selected = '';
 
-            lastFilter = $scope.activeFilter;
-            $scope.activeFilter = filterName;
+            // setup filters states
+            if (activeFilter !== filterName) {
+                $scope.filters[activeFilter.toUpperCase()].selected = '';
+                prevFilter = activeFilter;
+                activeFilter = filterName;
+                $scope.filters[activeFilter.toUpperCase()].selected = 'selected';
+            }
 
             $scope.filteredItems = $scope.items.filter(function(item) {
 
@@ -76,7 +80,6 @@ angular.module('todolist.Directives', [
                 }
             });
 
-            $scope.filters[$scope.activeFilter.toUpperCase()].selected = 'selected';
         };
 
         $scope.$watchCollection('items', function(newItems, oldItems, scope) {
