@@ -70,13 +70,13 @@ describe('TODO List module', function() {
                 '<strong>Show: </strong>' +
                 '<ul>' +
                     '<li>' + 
-                        '<a href="#active" ng-click="filterBy(filters.ACTIVE)" class="filterBy">ACTIVE</a>' + 
+                        '<a href="#active" ng-click="filterBy(filters.ACTIVE.name)" ng-class="filters.ACTIVE.selected" class="filterBy">ACTIVE</a>' + 
                     '</li>' +
                     '<li>' +
-                        '<a href="#done" ng-click="filterBy(filters.DONE)" class="filterBy">DONE</a>' +
+                        '<a href="#done" ng-click="filterBy(filters.DONE.name)" ng-class="filters.DONE.selected" class="filterBy">DONE</a>' +
                     '</li>' +
                     '<li>' + 
-                        '<a href="#all" ng-click="filterBy(filters.ALL)" class="filterBy">ALL</a>' +
+                        '<a href="#all" ng-click="filterBy(filters.ALL.name)" ng-class="filters.ALL.selected" class="filterBy selected">ALL</a>' +
                     '</li>' +
                 '</ul>' +
                 '<ul class="list ng-isolate-scope" items="filteredItems" removable-items="">' +
@@ -117,6 +117,7 @@ describe('TODO List module', function() {
 
         // ACTIVE filter
         clickElement(filters[0]);
+        expect(filters[0].className).toContain('selected');
 
         items = elem[0].querySelectorAll('.listItem');
 
@@ -130,6 +131,7 @@ describe('TODO List module', function() {
 
         // DONE filter
         clickElement(filters[1]);
+        expect(filters[1].className).toContain('selected');
 
         items = elem[0].querySelectorAll('.listItem');
 
@@ -142,6 +144,7 @@ describe('TODO List module', function() {
 
         // ALL "filter"
         clickElement(filters[2]);
+        expect(filters[2].className).toContain('selected');
 
         items = elem[0].querySelectorAll('.listItem');
         
@@ -155,6 +158,7 @@ describe('TODO List module', function() {
 
         // DONE filter
         clickElement(filters[1]);
+        expect(filters[1].className).toContain('selected');
 
         items = elem[0].querySelectorAll('.listItem');
         clickElement(items[0].querySelector('.itemRemoveButton'));

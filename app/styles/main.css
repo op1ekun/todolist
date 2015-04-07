@@ -14,3 +14,7 @@
 .listItem.done .itemDoneButton {
     display: none;
 }
+
+.selected {
+	font-weight: bold;
+}
