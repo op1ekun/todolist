@@ -80,19 +80,19 @@ describe('TODO List module', function() {
                     '</li>' +
                 '</ul>' +
                 '<ul class="list ng-isolate-scope" items="filteredItems" removable-items="">' +
-                    '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-scope done" inject="">' +
+                    '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-scope done">' +
                         '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton ng-scope">DONE</a>' +
                         '<span ng-transclude=""></span>' + 
                         '<span class="itemText ng-binding">item1</span>' +
                         '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
                     '</li>' +
-                    '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-scope" inject="">' +
+                    '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-scope">' +
                         '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton ng-scope">DONE</a>' +
                         '<span ng-transclude=""></span>' + 
                         '<span class="itemText ng-binding">item2</span>' +
                         '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
                     '</li>' + 
-                    '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-scope" inject="">' +
+                    '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-scope">' +
                         '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton ng-scope">DONE</a>' +
                         '<span ng-transclude=""></span>' + 
                         '<span class="itemText ng-binding">item3</span>' +

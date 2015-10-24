@@ -22,6 +22,7 @@ module.exports = function(config) {
         'app/modules/notification/notification.module.js',
         'app/modules/list/list.directives.js',
         'app/modules/list/list.module.js',
+        'app/modules/todolist/todolist.decorators.js',
         'app/modules/todolist/todolist.directives.js',
         'app/modules/todolist/todolist.module.js',
         'app/modules/itemvalidator/itemvalidator.directives.js',
@@ -46,7 +47,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['dots'],
+    reporters: ['spec'],
 
 
     // web server port
@@ -67,6 +68,7 @@ module.exports = function(config) {
 
     plugins: [
         'karma-phantomjs-launcher',
+        'karma-spec-reporter',
         'karma-jasmine'
     ],
 

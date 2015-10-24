@@ -16,7 +16,6 @@ angular.module('list.Directives', [
     }
 
     function listController($scope) {
-
         $scope.removeItem = function(item) {
             var index = $scope.items.indexOf(item);
             $scope.items.splice(index, 1);
@@ -31,7 +30,7 @@ angular.module('list.Directives', [
         replace: true,
         transclude: true,
         template:   '<ul class="list">' + 
-                        '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem" inject>' +
+                        '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem">' +
                             // replaced by a custom element
                             '<span ng-transclude></span>' +
                             // FIXME change span to ahref 
