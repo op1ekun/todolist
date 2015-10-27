@@ -8,7 +8,7 @@ describe('List module', function() {
     var scope, compile, elem, cleanedHTML;
 
     // initialize the app
-    beforeEach(module('todoApp'));
+    beforeEach(module('list.Directives'));
 
     // inject services
     beforeEach(inject(function($rootScope, $compile) {

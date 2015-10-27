@@ -16,11 +16,12 @@
                 <span class="error" ng-show="addItemForm.itemName.$error.duplicate">Duplicated item</span>
             </form>
 
-            <todolist items="todo.items"></todolist>
-            <!-- <list items="todo.items" removable-items></list> -->
+            <!-- <todolist items="todo.items"></todolist> -->
+            <list class="todolist" items="todo.items" removable-items></list>
         </div>
-<!-- 
+<!--  
         <script src="app/modules/list/list.directives.js"></script>
+        <script src="app/modules/list/list.decorators.js"></script>
         <script src="app/modules/list/list.module.js"></script>
 
         <script src="app/modules/todolist/todolist.directives.js"></script>
@@ -34,7 +35,7 @@
 
         <script src="app/app.controllers.js"></script>
         <script src="app/app.js"></script>
--->
+ -->
         <script src="dist/bundle.min.js"></script>
     </body>
 </html>

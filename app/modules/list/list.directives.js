@@ -1,5 +1,5 @@
 angular.module('list.Directives', [
-    'notification.Services'
+    // 'notification.Services'
 ])
 .directive('list', function listDirective() {
     'use strict';
@@ -41,28 +41,4 @@ angular.module('list.Directives', [
         controller: listController,
         link: linker
     };
-})
-// FIXME id adds another DONE at the end of the item
-.directive('inject', function(){
-    'use strict';
-
-    return {
-        link: function($scope, $element, $attrs, controller, $transclude) {
-            var innerScope = $scope.$new();
-            
-            $transclude(innerScope, function(clone) {
-                // DEBUG
-                // console.log($element);
-
-                // $element.empty();
-                var ahref = $element.find('a');
-                ahref.remove();
-
-                $element.prepend(clone);
-                $element.on('$destroy', function() {
-                    innerScope.$destroy();
-                });
-            });
-        }
-    };
-})
+});

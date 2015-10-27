@@ -20,7 +20,7 @@ describe('TODO List module', function() {
     };
 
     // initialize the app
-    beforeEach(module('todoApp'));
+    beforeEach(module('todolist.Directives'));
 
     // inject services
     beforeEach(inject(function($rootScope, $compile) {
@@ -81,20 +81,23 @@ describe('TODO List module', function() {
                 '</ul>' +
                 '<ul class="list ng-isolate-scope" items="filteredItems" removable-items="">' +
                     '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-scope done">' +
-                        '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton ng-scope">DONE</a>' +
-                        '<span ng-transclude=""></span>' + 
+                        '<span ng-transclude="">' +
+                            '<a href="" ng-click="markAsDone($parent.item)" class="itemDoneButton ng-scope">DONE</a>' +
+                        '</span>' + 
                         '<span class="itemText ng-binding">item1</span>' +
                         '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
                     '</li>' +
                     '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-scope">' +
-                        '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton ng-scope">DONE</a>' +
-                        '<span ng-transclude=""></span>' + 
+                        '<span ng-transclude="">' +
+                            '<a href="" ng-click="markAsDone($parent.item)" class="itemDoneButton ng-scope">DONE</a>' +
+                        '</span>' + 
                         '<span class="itemText ng-binding">item2</span>' +
                         '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
                     '</li>' + 
                     '<li ng-repeat="item in items" ng-class="item.cssClass" class="listItem ng-scope">' +
-                        '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton ng-scope">DONE</a>' +
-                        '<span ng-transclude=""></span>' + 
+                        '<span ng-transclude="">' +
+                            '<a href="" ng-click="markAsDone($parent.item)" class="itemDoneButton ng-scope">DONE</a>' +
+                        '</span>' + 
                         '<span class="itemText ng-binding">item3</span>' +
                         '<a href="#" ng-if="removableItems" ng-click="removeItem(item)" class="itemRemoveButton ng-scope"> [x] </a>' +
                     '</li>' + 

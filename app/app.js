@@ -1,6 +1,7 @@
 angular.module('todoApp', [
     'todoApp.Controllers',
-    'todolist',
+    // 'todolist',
+    'list.Decorators',
     'itemValidator'
 ])
 .config(function() {
@@ -12,9 +13,9 @@ angular.module('todoApp', [
 .run(function($rootScope) {
     'use strict';
 
-    // add app version to the "global" namespace
+    // add app version to the global scope
     $rootScope.app = {
-        version : '0.0.4'
+        version : '0.0.5'
     };
 
     // DEBUG
