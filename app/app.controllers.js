@@ -1,12 +1,11 @@
 angular.module('todoApp.Controllers', [
-    'notification'
+    // 'notification'
 ])
-.controller('TodoAppController', function TodoAppController($scope, notification) {
+.controller('TodoAppController', function TodoAppController($scope) {
     'use strict';
 
     // DEBUG
-    // console.log('TodoAppController');
-    // console.log('TodoAppController notification', notification);
+    // console.log('TodoAppController');;
 
     $scope.todo = {
         item: '',

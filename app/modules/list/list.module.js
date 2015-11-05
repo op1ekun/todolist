@@ -1,3 +1,4 @@
 angular.module('list', [
-    'list.Directives'
+    'list.Directives',
+    'list.Decorators'
 ]);

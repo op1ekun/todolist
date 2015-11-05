@@ -132,8 +132,9 @@ angular.module('todolist.Directives', [
                             '</li>' +
                         '</ul>' +
                         '<list items="filteredItems" removable-items>' +
-                            // a very nasty way of getting the to markAsDone method from isolated scope ;)
-                            '<a href="" ng-click="$parent.$parent.$parent.markAsDone(item)" class="itemDoneButton">DONE</a>' +
+                            // markAsDone uses transcluded scope which in this case is the todolist scope
+                            // $parent.item will refer to ng-repeat scope
+                            '<a href="" ng-click="markAsDone($parent.item)" class="itemDoneButton">DONE</a>' +
                         '</list>' + 
                     '</div>',
         controller: todolistController

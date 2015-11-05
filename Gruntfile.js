@@ -9,9 +9,19 @@ module.exports = function(grunt) {
             }
         },
         watch: {
+            options: {
+                livereload: true
+            },
             scripts: {
-                files: [ 'app/*.js', 'app/modules/*/*.js' ],
-                tasks: [ 'build' ]
+                files: [ 
+                    'index.html',
+                    'app/*.js',
+                    'app/modules/*/*.js',
+                ],
+                tasks: [ 
+                    // 'karma',
+                    'build',
+                ]
             },
         },
         ngAnnotate: {
@@ -41,6 +51,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     // grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-ng-annotate');
 
