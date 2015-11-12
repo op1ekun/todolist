@@ -82,14 +82,17 @@ angular.module('todolist.Directives', [
 
         };
 
+        // a newly added item, activate filter in case it's not set to ALL
         $scope.$watchCollection('items', function(newItems, oldItems, scope) {
-            $scope.filterBy(activeFilter);
+            if (activeFilter !== $scope.filters.ALL.name) {
+                $scope.filterBy(activeFilter);
+            }
         });
 
+        // synchronizes with the scope.items list whenever an item is removed
         $scope.$watchCollection('filteredItems', function(newItems, oldItems, scope) {
-            var filtering = isFiltering();
-
-            if (filtering) {
+            // no need to sync if items are being filtered
+            if (isFiltering()) {
                 return;
             }
 
@@ -97,7 +100,7 @@ angular.module('todolist.Directives', [
                 var toBeRemovedIndex;
 
                 // find if an old item is missing from new items
-                if (newItems.indexOf(oldItem) == -1) {
+                if (newItems.indexOf(oldItem) === -1) {
                     // if it does, 
                     // try find it in the main items collection
                     toBeRemovedIndex = $scope.items.indexOf(oldItem);

@@ -16,65 +16,111 @@ angular.module('list.Decorators', [
             
             origController.apply(this, arguments);
 
-                // supported filters
-                $scope.filters = {
-                    ACTIVE: {
-                        name: 'active'
-                    },
-                    DONE: {
-                        name: 'done'
-                    },
-                    ALL: {
-                        name: 'all',
-                        selected: 'selected'
-                    }
-                };
+            // supported filters
+            $scope.filters = {
+                ACTIVE: {
+                    name: 'active'
+                },
+                DONE: {
+                    name: 'done'
+                },
+                ALL: {
+                    name: 'all',
+                    selected: 'selected'
+                }
+            };
 
-                // default filter
-                activeFilter = prevFilter = $scope.filters.ALL.name;
+            // default filter
+            activeFilter = prevFilter = $scope.filters.ALL.name;
+            $scope.filteredItems = $scope.items;
 
-                // remember the whole list
-                $scope.allItems = $scope.items;
+            /**
+             * Calculates the app state based on last and active filter.
+             * Abstracts the state calculation and management from the consumer.
+             * 
+             * @return {Boolean}    the state value
+             */
+            function isFiltering() {
+                // calculate the state
+                var state = (activeFilter !== prevFilter);
+                // reset flag
+                prevFilter = activeFilter;
+                // return calculated state
+                return state;
+            }
 
-                $scope.markAsDone = function(item) {
-                    var index = $scope.items.indexOf(item);
-                    $scope.items[index].done = true;
-                    $scope.items[index].cssClass = 'done';
-                };
+            $scope.markAsDone = function(item) {
+                var index = $scope.items.indexOf(item);
+                $scope.items[index].done = true;
+                $scope.items[index].cssClass = 'done';
+            };
 
-                $scope.filterBy = function(filterName) {
+            $scope.filterBy = function(filterName) {
 
-                    // setup filters states
-                    if (activeFilter !== filterName) {
-                        $scope.filters[activeFilter.toUpperCase()].selected = '';
-                        prevFilter = activeFilter;
-                        activeFilter = filterName;
-                        $scope.filters[activeFilter.toUpperCase()].selected = 'selected';
-                    }
+                // setup filters states
+                if (activeFilter !== filterName) {
+                    $scope.filters[activeFilter.toUpperCase()].selected = '';
+                    prevFilter = activeFilter;
+                    activeFilter = filterName;
+                    $scope.filters[activeFilter.toUpperCase()].selected = 'selected';
+                }
 
-                    var filteredItems = $scope.allItems.filter(function(item) {
+                $scope.filteredItems = $scope.items.filter(function(item) {
 
-                        switch(filterName) {
+                    switch(filterName) {
 
-                            case $scope.filters.ACTIVE.name:
-                                if (!item.done) {
-                                    return item;
-                                }
-                            break;
-
-                            case $scope.filters.DONE.name:
-                                if (item.done) {
-                                    return item;
-                                }
-                            break;
-
-                            default:
+                        case $scope.filters.ACTIVE.name:
+                            if (!item.done) {
                                 return item;
-                        }
-                    });
+                            }
+                        break;
 
-                    $scope.items = filteredItems;
-                };
+                        case $scope.filters.DONE.name:
+                            if (item.done) {
+                                return item;
+                            }
+                        break;
+
+                        default:
+                            return item;
+                    }
+                });
+            };
+
+            // a newly added item, activate filter in case it's not set to ALL
+            $scope.$watchCollection('items', function(newItems, oldItems, scope) {
+                if (activeFilter !== $scope.filters.ALL.name) {
+                    $scope.filterBy(activeFilter);
+                }
+            });
+
+            // watches items and reacts to an item being removed from the current view
+            // synchronizing items with the scope.items list
+            $scope.$watchCollection('filteredItems', function synchronizeItems(newItems, oldItems, scope) {
+                // no need to sync if items are being filtered;
+                if (isFiltering()) {
+                    return;
+                }
+
+                // the changes occured in the same filtered list of items
+                // basically check if there were more items in the list than previously
+                oldItems.some(function(oldItem) {
+                    var toBeRemovedIndex;
+
+                    // find if an old item is missing from new items
+                    if (newItems.indexOf(oldItem) === -1) {
+                        // if it does, 
+                        // try find it in the main items collection
+                        toBeRemovedIndex = $scope.items.indexOf(oldItem);
+
+                        // remove the item from the main collection
+                        if (toBeRemovedIndex > -1) {
+                            $scope.items.splice(toBeRemovedIndex, 1);
+                            return;
+                        }
+                    }
+                });
+            });
         };
 
         // explicitly annotate dependency
@@ -96,7 +142,10 @@ angular.module('list.Decorators', [
                 '</ul>' +
                 // no need for transclude, 
                 // just replace it with the addtional HTML required by todolist
-                origTemplate.replace('<span ng-transclude></span>', '<a href="" ng-click="markAsDone(item)" class="itemDoneButton">DONE</a>') + 
+                origTemplate
+                    .replace('<span ng-transclude></span>', '<a href="" ng-click="markAsDone(item)" class="itemDoneButton">DONE</a>')
+                    // auxilary list of filtered items is necessary to be able to have a separate watcher
+                    .replace('ng-repeat="item in items"', 'ng-repeat="item in filteredItems"') + 
             '</div>';
 
         return $delegate;

@@ -15,7 +15,7 @@ angular.module('todoApp', [
 
     // add app version to the global scope
     $rootScope.app = {
-        version : '0.0.5'
+        version : '0.0.6'
     };
 
     // DEBUG
